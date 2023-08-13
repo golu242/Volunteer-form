@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <style>
+    body {
+      background-color: aliceblue;
+    }
+
+    #contactForm {
+      width: 300px;
+      background-color: white;
+      padding: 22px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    input {
+      margin: 0;
+      margin-bottom: 10px;
+      margin-top: 6px;
+      align-items: center;
+      font-size: 0.7rem;
+      padding: 0.5rem 0rem;
+    }
+
+    .item {
+      width: 100%;
+    }
+
+    .button {
+      margin-top: 7px;
+      margin-bottom: 9px;
+      align-items: center;
+      padding: 0.5rem 1rem;
+    }
+
+    .button:hover {
+      background-color: chartreuse;
+      color: white;
+    }
+  </style>
+
+  <body>
+    <h1 style="text-align: center">Become a Volunteer</h1>
+    <form id="contactForm">
+      <div>
+        <input
+          class="item"
+          type="text"
+          id="name"
+          name="full name"
+          placeholder="Full name*"
+        />
+      </div>
+
+      <div>
+        <br /><input
+          class="item"
+          type="text"
+          id="email"
+          name="email"
+          placeholder="Email address*"
+        />
+      </div>
+
+      <div>
+        <br />
+        <input
+          class="item"
+          type="phonenumber"
+          id="phonenumber"
+          name="phonenumber"
+          placeholder="Phone number*"
+        />
+      </div>
+
+      <div>
+        <br />
+        <input
+          class="item"
+          type="Address"
+          id="address"
+          name="Address"
+          placeholder="Address*"
+        />
+      </div>
+
+      <div>
+        <br />
+        <input
+          class="item"
+          type="Occupation"
+          id="occupation"
+          name="Occupation"
+          placeholder="Occupation*"
+        />
+      </div>
+
+      <div>
+        <br />
+        <input
+          class="item"
+          type="Message"
+          id="message"
+          name="Message"
+          placeholder="Message*"
+        />
+      </div>
+
+      <div>
+        <br />
+        <input class="button" type="submit" value="Submit" />
+      </div>
+    </form>
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-database.js"></script>
+    <script>
+      const firebaseConfig = {
+        apiKey: "AIzaSyAJas1B7Nv5Eujr0gSygMhFUnpjqt9JIE4",
+        authDomain: "magadh-mission-4d530.firebaseapp.com",
+        databaseURL: "https://magadh-mission-4d530-default-rtdb.firebaseio.com",
+        projectId: "magadh-mission-4d530",
+        storageBucket: "magadh-mission-4d530.appspot.com",
+        messagingSenderId: "565276001914",
+        appId: "1:565276001914:web:a2967bdb3670589e7d5dc3",
+        measurementId: "G-YM84JTNPPL",
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      const analytics = firebase.analytics();
+
+      const contactForm = document.getElementById("contactForm");
+      contactForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const phoneNumber = document.getElementById("phonenumber").value;
+        const address = document.getElementById("address").value;
+        const occupation = document.getElementById("occupation").value;
+        const message = document.getElementById("message").value;
+
+        // Reference to your Firebase database
+        const database = firebase.database().ref("contacts");
+
+        // Push the contact data to the database
+        database.push({
+          name: name,
+          email: email,
+          phoneNumber: phoneNumber,
+          address: address,
+          occupation: occupation,
+          message: message,
+        });
+
+        alert("Data submitted successfully!");
+        contactForm.reset();
+      });
+    </script>
+  </body>
+</html>
